@@ -1,7 +1,8 @@
-struct CoreDataStorage {
+public struct CoreDataStorageFun {
+
     var text = "Hello, World!"
 
-    func printText() {
+    public func printText() {
         print(text)
     }
 }
