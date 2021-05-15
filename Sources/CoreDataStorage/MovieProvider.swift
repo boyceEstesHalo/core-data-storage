@@ -17,7 +17,7 @@ import Combine
  * It makes for a cleaner view-model and allows for us to move class with
  * the rest of the Core Data classes.
  */
-class MovieProvider: NSObject {
+public class MovieProvider: NSObject {
 
     // MARK: - Properties
     private var fetchedResultsController: NSFetchedResultsController<Movie>
@@ -97,7 +97,7 @@ class MovieProvider: NSObject {
 // MARK: - Fetched Results Controller Delegate
 extension MovieProvider: NSFetchedResultsControllerDelegate {
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 
         moviePassthroughSubject.send(self)
     }
