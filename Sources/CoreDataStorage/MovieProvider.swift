@@ -33,7 +33,7 @@ public class MovieProvider: NSObject {
 
 
     // MARK: - Lifecycle
-    init(storageProvider: StorageProvider3) {
+    public init(storageProvider: StorageProvider3) {
 
         self.storageProvider = storageProvider
 
