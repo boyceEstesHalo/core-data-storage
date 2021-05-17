@@ -39,14 +39,14 @@ public class StorageProvider3 {
 
 
     // Main Context
-    var mainContext: NSManagedObjectContext {
+    public var mainContext: NSManagedObjectContext {
 
         return persistentContainer.viewContext
     }
 
 
     // MARK: - Lifecycle
-    init() {
+    public init() {
 
         // Print directory when initializing the CoreDataStack so we can open the persistent store manually
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
@@ -56,7 +56,7 @@ public class StorageProvider3 {
 
     // MARK: - Static Methods
     // Method to maintain exactly one model
-    static func model(name: String) throws -> NSManagedObjectModel {
+    public static func model(name: String) throws -> NSManagedObjectModel {
 
         if model == nil {
             model = try loadModel(name: name, bundle: Bundle.module)
@@ -65,7 +65,7 @@ public class StorageProvider3 {
     }
 
 
-    static func loadModel(name: String, bundle: Bundle) throws -> NSManagedObjectModel {
+    public static func loadModel(name: String, bundle: Bundle) throws -> NSManagedObjectModel {
 
         let name = StorageProvider3.modelName
         guard let modelURL = bundle.url(forResource: name, withExtension: "momd") else {
@@ -84,7 +84,7 @@ public class StorageProvider3 {
     // TODO: Test this by using batch method, then test using a normal save method on each value,
     // then test using inserting each and then saving once at the end
     // First step
-    func parseMovieDataFromJSON(with insertMethod: InsertMethodType) {
+    public func parseMovieDataFromJSON(with insertMethod: InsertMethodType) {
 
         print("parse...")
         var movieData = [String]()
@@ -130,7 +130,7 @@ public class StorageProvider3 {
     }
 
 
-    func parseMovieDataFromJSONIntoMovie(with insertMethod: InsertMethodType) {
+    public func parseMovieDataFromJSONIntoMovie(with insertMethod: InsertMethodType) {
         var movieData = [MovieModel]()
         guard let path = Bundle.main.path(forResource: "Movies5Pages", ofType: "json") else {
             assertionFailure("Could not get seed data.")
@@ -315,14 +315,14 @@ public class StorageProvider3 {
 
 
     // Let's do all our UserData stuff here too, I mean this IS a StorageProvider, no?
-    func fetchCurrentMovieSortOption() -> MovieSortOption {
+    public func fetchCurrentMovieSortOption() -> MovieSortOption {
 
         let rawMovieSortOrder = UserDefaults.standard.integer(forKey: UserDefaultKeys.movieSortOrder.rawValue)
         return MovieSortOption(rawValue: rawMovieSortOrder) ?? MovieSortOption.title
     }
 
 
-    func setCurrentMovieSortOption(to movieSortOrder: MovieSortOption) {
+    public func setCurrentMovieSortOption(to movieSortOrder: MovieSortOption) {
 
         let rawMovieSortOrder = UserDefaultKeys.movieSortOrder.rawValue
         UserDefaults.standard.set(rawMovieSortOrder, forKey: UserDefaultKeys.movieSortOrder.rawValue)

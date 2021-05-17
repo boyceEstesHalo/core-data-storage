@@ -17,7 +17,7 @@ import Foundation
  */
 
 // Include Decodable/Encodable(or Codable) if necessary
-struct MovieModel: Decodable {
+public struct MovieModel: Decodable {
 
     let title: String
     let overview: String?
@@ -35,7 +35,7 @@ struct MovieModel: Decodable {
 
     // Had to make decoding manual because Date needed to be taken from a string to the correct date.
     // smh.
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
 

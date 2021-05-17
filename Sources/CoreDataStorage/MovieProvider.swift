@@ -23,13 +23,13 @@ public class MovieProvider: NSObject {
     private var fetchedResultsController: NSFetchedResultsController<Movie>
     private var storageProvider: StorageProvider3
 
-    let moviePassthroughSubject = PassthroughSubject<MovieProvider, Never>()
+    public let moviePassthroughSubject = PassthroughSubject<MovieProvider, Never>()
     
-    var numberOfSections: Int {
+    public var numberOfSections: Int {
         return fetchedResultsController.sections?.count ?? 0
     }
 
-    var movieSortOrder: MovieSortOption
+    public var movieSortOrder: MovieSortOption
 
 
     // MARK: - Lifecycle
@@ -57,7 +57,7 @@ public class MovieProvider: NSObject {
 
 
     // MARK: - Methods
-    func createFetchedResultsController(sortBy sortOption: MovieSortOption) {
+    public func createFetchedResultsController(sortBy sortOption: MovieSortOption) {
 
         movieSortOrder = sortOption // update the new selection
         storageProvider.setCurrentMovieSortOption(to: movieSortOrder)
@@ -76,7 +76,7 @@ public class MovieProvider: NSObject {
     }
 
 
-    func numberOfItemsInSection(_ section: Int) -> Int {
+    public func numberOfItemsInSection(_ section: Int) -> Int {
         
         guard let sections = fetchedResultsController.sections,
               sections.endIndex > section else {
@@ -87,7 +87,7 @@ public class MovieProvider: NSObject {
     }
     
     
-    func object(at indexPath: IndexPath) -> Movie {
+    public func object(at indexPath: IndexPath) -> Movie {
         
         return fetchedResultsController.object(at: indexPath)
     }

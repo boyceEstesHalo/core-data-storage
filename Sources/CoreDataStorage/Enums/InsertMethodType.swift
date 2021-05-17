@@ -12,7 +12,7 @@ import Foundation
  different methods of inserting data into Core Data entity.
  */
 
-enum InsertMethodType {
+public enum InsertMethodType {
     
     case saveEachRecord
     case saveOnceForAllRecords

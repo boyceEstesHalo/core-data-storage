@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum MovieSortOption: Int {
+public enum MovieSortOption: Int {
 
     case popularity
     case releaseDate
     case title
 
-    func display() -> String{
+    public func display() -> String{
         
         switch self {
         case .popularity:

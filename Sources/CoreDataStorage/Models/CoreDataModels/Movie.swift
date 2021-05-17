@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 
-class Movie: NSManagedObject, ManagedObjectType {
+public class Movie: NSManagedObject, ManagedObjectType {
 
     // MARK: Properties
-    static var entityName: String = "Movie"
+    public static var entityName: String = "Movie"
 
     // Attributes
     @NSManaged public var title: String

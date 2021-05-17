@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum UserDefaultKeys: String {
+public enum UserDefaultKeys: String {
     
     case didLaunchBefore = "DidLaunchBefore"
     case movieSortOrder = "MovieSortOrder"
