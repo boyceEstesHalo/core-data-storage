@@ -24,12 +24,11 @@ public class MovieProvider: NSObject {
     private var storageProvider: StorageProvider3
 
     public let moviePassthroughSubject = PassthroughSubject<MovieProvider, Never>()
-    
+    public var movieSortOrderSubject: CurrentValueSubject<MovieSortOption, Never>
+
     public var numberOfSections: Int {
         return fetchedResultsController.sections?.count ?? 0
     }
-
-    public var movieSortOrder: MovieSortOption
 
 
     // MARK: - Lifecycle
@@ -38,8 +37,9 @@ public class MovieProvider: NSObject {
         self.storageProvider = storageProvider
 
 //        guard let movieSortOrder = MovieSortOption(rawValue: storageProvider.fetchCurrentMovieSortOption()) else { return }
-        movieSortOrder = storageProvider.fetchCurrentMovieSortOption()
-        let fetchRequest = Movie.createFetchRequest(sortBy: movieSortOrder)
+        movieSortOrderSubject = CurrentValueSubject(storageProvider.fetchCurrentMovieSortOption())
+
+        let fetchRequest = Movie.createFetchRequest(sortBy: movieSortOrderSubject.value)
 
         self.fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -59,8 +59,8 @@ public class MovieProvider: NSObject {
     // MARK: - Methods
     public func createFetchedResultsController(sortBy sortOption: MovieSortOption) {
 
-        movieSortOrder = sortOption // update the new selection
-        storageProvider.setCurrentMovieSortOption(to: movieSortOrder)
+        movieSortOrderSubject.value = sortOption // update the new selection
+        storageProvider.setCurrentMovieSortOption(to: movieSortOrderSubject.value)
         let fetchRequest = Movie.createFetchRequest(sortBy: sortOption)
 
         self.fetchedResultsController = NSFetchedResultsController(
