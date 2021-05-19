@@ -69,6 +69,7 @@ public class Movie: NSManagedObject, ManagedObjectType {
         var index = 0
         let total = movieData.count
 
+        // Only available with the iOS 14 (? I guess)
         // This is a recursive method. Return false until you want it to end.
         let batchInsert = NSBatchInsertRequest(entity: Movie.entity(), managedObjectHandler: { managedObject -> Bool in
 
